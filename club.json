@@ -1,0 +1,27 @@
+[
+    {
+      "id": 101,
+      "name": "FC Bayern München",
+      "stadium": "Allianz Arena",
+      "founded": 1900,
+      "imageUrl": "images/bayern.png",
+      "isChampion": true
+    },
+    {
+      "id": 102,
+      "name": "Borussia Dortmund",
+      "stadium": "Signal Iduna Park",
+      "founded": 1909,
+      "imageUrl": "images/dortmund.png",
+      "isChampion": false
+    },
+    {
+      "id": 103,
+      "name": "Bayer Leverkusen",
+      "stadium": "BayArena",
+      "founded": 1904,
+      "imageUrl": "images/leverkusen.png",
+      "isChampion": false
+    }
+  ]
+  

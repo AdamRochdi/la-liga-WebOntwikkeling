@@ -2,372 +2,339 @@
 <html lang="nl">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="images/la-liga.png" type="image/x-icon" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="images/la-liga.png" type="image/x-icon" />
+  <title>La Liga Spelers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #f9f9f9;
+      color: #222;
+      padding: 1rem;
+    }
 
-    <title>La Liga Spelers</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 2rem auto;
-            background: #f9f9f9;
-            color: #222;
-            padding: 1rem;
-        }
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 2rem;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #0077cc;
+    }
 
-        #filterWrapper {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-        #filterInput {
-            flex-grow: 1;
-            padding: 0.7rem 1rem;
-            font-size: 1.1rem;
-            border-radius: 6px 0 0 6px;
-            border: 1.5px solid #ccc;
-            border-right: none;
-            outline-offset: -2px;
-            cursor: text;
-        }
+    #filterInput {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
+      margin-bottom: 1.5rem;
+    }
 
-        #sortArrow {
-            user-select: none;
-            font-size: 1.3rem;
-            padding: 0 12px;
-            background: #eee;
-            border: 1.5px solid #ccc;
-            border-left: none;
-            border-radius: 0 6px 6px 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s ease;
-        }
+    #sortControls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
 
-        #sortArrow:hover {
-            background-color: #ddd;
-        }
+    .sort-button {
+      cursor: pointer;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      font-weight: bold;
+      color: #0077cc;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
 
-        /* Team filter checkboxes container */
-        #clubFilters {
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+    .arrow {
+      font-size: 0.9rem;
+    }
 
-        #clubFilters label {
-            margin-right: 15px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            user-select: none;
-        }
+    #clubFilters {
+      margin-bottom: 1.5rem;
+    }
 
-        #clubFilters input[type="checkbox"] {
-            margin-right: 6px;
-            cursor: pointer;
-        }
+    #clubFilters label {
+      margin-right: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      user-select: none;
+    }
 
-        #spelersContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-            justify-content: center;
-        }
+    #clubFilters input[type="checkbox"] {
+      margin-right: 6px;
+      cursor: pointer;
+    }
 
-        .speler {
-            background: white;
-            border-radius: 18px;
-            padding: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            transition: transform 0.15s ease-in-out;
-            user-select: none;
-        }
+    #spelersContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      justify-content: center;
+    }
 
-        .speler:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
-        }
+    .speler {
+      background: white;
+      border-radius: 18px;
+      padding: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      transition: transform 0.15s ease-in-out;
+      user-select: none;
+    }
 
-        .speler img {
-            width: 90px;
-            height: 90px;
-            border-radius: 18px;
-            object-fit: cover;
-            border: 2.5px solid #0077cc;
-            background: #eee;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
+    .speler:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+    }
 
-        .speler span {
-            font-weight: 600;
-            color: #0077cc;
-            font-size: 1.1rem;
-            text-align: left;
-            display: block;
-        }
+    .speler img {
+      width: 90px;
+      height: 90px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 2.5px solid #0077cc;
+      background: #eee;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
 
-        /* Detail overlay */
-        #detailOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+    .speler span {
+      font-weight: 600;
+      color: #0077cc;
+      font-size: 1.1rem;
+      text-align: left;
+      display: block;
+    }
 
-        #detailContent {
-            background: white;
-            border-radius: 12px;
-            max-width: 400px;
-            width: 90%;
-            padding: 1.5rem;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            overflow-y: auto;
-            max-height: 90vh;
-            position: relative;
-        }
+    #detailOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
 
-        #detailContent img.player-img {
-            display: block;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1rem;
-            border: 3px solid #0077cc;
-            background: #eee;
-        }
+    #detailContent {
+      background: white;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      overflow-y: auto;
+      max-height: 90vh;
+      position: relative;
+    }
 
-        #detailContent img.team-img {
-            display: block;
-            width: 100px;
-            margin: 1rem auto 0;
-        }
+    #detailContent img.player-img {
+      display: block;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      border: 3px solid #0077cc;
+      background: #eee;
+    }
 
-        #closeBtn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: #999;
-            transition: color 0.2s ease;
-        }
+    #detailContent img.team-img {
+      display: block;
+      width: 100px;
+      margin: 1rem auto 0;
+    }
 
-        #closeBtn:hover {
-            color: #0077cc;
-        }
+    #closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.2s ease;
+    }
 
-        #detailContent h2 {
-            margin-top: 0;
-            color: #0077cc;
-            text-align: center;
-        }
+    #closeBtn:hover {
+      color: #0077cc;
+    }
 
-        #detailContent p {
-            margin: 0.5rem 0;
-        }
-    </style>
+    #detailContent h2 {
+      margin-top: 0;
+      color: #0077cc;
+      text-align: center;
+    }
+
+    #detailContent p {
+      margin: 0.5rem 0;
+    }
+  </style>
 </head>
 
 <body>
+  <nav>
+    <a href="index.html">Players</a>
+    <a href="club.html">Clubs</a>
+    <a href="/user">User</a>
+  </nav>
 
-    <h1>La Liga Spelers</h1>
+  <h1>La Liga Spelers</h1>
 
-    <div id="filterWrapper">
-        <input id="filterInput" type="text" placeholder="Filter spelers op naam..."
-            aria-label="Filter spelers op naam" />
-        <span id="sortArrow" aria-label="Sorteer spelers A tot Z of Z tot A" role="button" tabindex="0">▼</span>
+  <input id="filterInput" type="text" placeholder="Filter spelers op naam..." aria-label="Filter spelers op naam" />
+
+  <div id="sortControls">
+    <button class="sort-button" data-sort="name">Naam <span class="arrow">&#x25B2;</span></button>
+    <button class="sort-button" data-sort="age">Leeftijd <span class="arrow">&#x25B2;</span></button>
+  </div>
+
+  <div id="clubFilters" aria-label="Filter op teams" role="group"></div>
+
+  <div id="spelersContainer" aria-live="polite"></div>
+
+  <div id="detailOverlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div id="detailContent">
+      <button id="closeBtn" aria-label="Sluit details">&times;</button>
     </div>
+  </div>
 
-    <!-- Team filter checkboxes -->
-    <div id="clubFilters" aria-label="Filter op teams" role="group"></div>
+  <script>
+    const filterInput = document.getElementById("filterInput");
+    const clubFiltersContainer = document.getElementById("clubFilters");
+    const spelersContainer = document.getElementById("spelersContainer");
+    const detailOverlay = document.getElementById("detailOverlay");
+    const detailContent = document.getElementById("detailContent");
+    const closeBtn = document.getElementById("closeBtn");
+    const sortButtons = document.querySelectorAll(".sort-button");
 
-    <div id="spelersContainer" aria-live="polite"></div>
+    let alleSpelers = [];
+    let huidigeSort = { veld: "name", richting: 1 };
 
-    <div id="detailOverlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-        <div id="detailContent">
-            <button id="closeBtn" aria-label="Sluit details">&times;</button>
-            <!-- Details worden hier dynamisch ingevuld -->
-        </div>
-    </div>
+    async function haalSpelersOp() {
+      const res = await fetch("/spelers");
+      const data = await res.json();
+      alleSpelers = data.spelers || data;
+    }
 
-    <script>
-        const filterInput = document.getElementById("filterInput");
-        const sortArrow = document.getElementById("sortArrow");
-        const clubFiltersContainer = document.getElementById("clubFilters");
-        const spelersContainer = document.getElementById("spelersContainer");
-        const detailOverlay = document.getElementById("detailOverlay");
-        const detailContent = document.getElementById("detailContent");
-        const closeBtn = document.getElementById("closeBtn");
+    function maakTeamCheckboxes() {
+      const uniekeTeams = [...new Set(alleSpelers.map(s => s.team.name))].sort();
+      clubFiltersContainer.innerHTML = "";
+      uniekeTeams.forEach(team => {
+        const label = document.createElement("label");
+        label.textContent = team;
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = true;
+        checkbox.value = team;
+        checkbox.name = "teamFilter";
+        label.prepend(checkbox);
+        clubFiltersContainer.appendChild(label);
+        checkbox.addEventListener("change", filterEnToonSpelers);
+      });
+    }
 
-        let alleSpelers = [];
-        let sortAsc = true; // true = A-Z, false = Z-A
+    function filterEnToonSpelers() {
+      const zoekterm = filterInput.value.toLowerCase();
+      const geselecteerdeTeams = Array.from(document.querySelectorAll('input[name="teamFilter"]:checked')).map(cb => cb.value);
 
-        async function haalSpelersOp() {
-            try {
-                const res = await fetch("/spelers");
-                if (!res.ok) throw new Error("Kon spelers niet laden");
-                const data = await res.json();
-                alleSpelers = data.spelers || data;
-            } catch (error) {
-                spelersContainer.innerHTML = `<p style="color:red;">Fout bij laden spelers: ${error.message}</p>`;
-                alleSpelers = [];
-            }
-        }
+      let gefilterd = alleSpelers.filter(s =>
+        s.name.toLowerCase().includes(zoekterm) &&
+        geselecteerdeTeams.includes(s.team.name)
+      );
 
-        function maakTeamCheckboxes() {
-            const uniekeTeams = [...new Set(alleSpelers.map(s => s.team.name))].sort();
+      gefilterd.sort((a, b) => {
+        let veld = huidigeSort.veld;
+        let valA = typeof a[veld] === "string" ? a[veld].toLowerCase() : a[veld];
+        let valB = typeof b[veld] === "string" ? b[veld].toLowerCase() : b[veld];
+        return (valA > valB ? 1 : valA < valB ? -1 : 0) * huidigeSort.richting;
+      });
 
-            clubFiltersContainer.innerHTML = "";
-            uniekeTeams.forEach(team => {
-                const label = document.createElement("label");
-                label.htmlFor = `team-${team.replace(/\s+/g, "")}`;
-                label.textContent = team;
+      toonSpelers(gefilterd);
+    }
 
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.value = team;
-                checkbox.name = "teamFilter";
-                checkbox.id = `team-${team.replace(/\s+/g, "")}`;
-                checkbox.checked = true;
+    function toonSpelers(spelers) {
+      spelersContainer.innerHTML = spelers.map(s => `
+                <div class="speler" tabindex="0" data-id="${s.id}">
+                    <img src="${s.imageUrl}" alt="${s.name}" />
+                    <span>${s.name}</span>
+                </div>`).join("");
 
-                label.prepend(checkbox);
-                clubFiltersContainer.appendChild(label);
-
-                checkbox.addEventListener("change", filterEnToonSpelers);
-            });
-        }
-
-        function sortPlayersByName(spelers) {
-            return spelers.sort((a, b) => {
-                if (a.name.toLowerCase() < b.name.toLowerCase()) return sortAsc ? -1 : 1;
-                if (a.name.toLowerCase() > b.name.toLowerCase()) return sortAsc ? 1 : -1;
-                return 0;
-            });
-        }
-
-        function filterEnToonSpelers() {
-            const zoekterm = filterInput.value.trim().toLowerCase();
-            const geselecteerdeTeams = Array.from(document.querySelectorAll('input[name="teamFilter"]:checked')).map(cb => cb.value);
-
-            let gefilterdeSpelers = alleSpelers.filter(speler =>
-                speler.name.toLowerCase().includes(zoekterm) &&
-                geselecteerdeTeams.includes(speler.team.name)
-            );
-
-            gefilterdeSpelers = sortPlayersByName(gefilterdeSpelers);
-            toonSpelers(gefilterdeSpelers);
-        }
-
-        function toonSpelers(spelers) {
-            if (!spelers.length) {
-                spelersContainer.innerHTML = "<p>Geen spelers gevonden.</p>";
-                return;
-            }
-            spelersContainer.innerHTML = spelers
-                .map(
-                    (s) => `
-            <div class="speler" tabindex="0" role="button" aria-pressed="false" data-id="${s.id}">
-              <img src="${s.imageUrl}" alt="Foto van ${s.name}" />
-              <span>${s.name}</span>
-            </div>`
-                )
-                .join("");
-
-            document.querySelectorAll(".speler").forEach((el) => {
-                el.addEventListener("click", () => toonDetail(el.dataset.id));
-                el.addEventListener("keydown", (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        toonDetail(el.dataset.id);
-                    }
-                });
-            });
-        }
-
-        async function toonDetail(id) {
-            try {
-                const res = await fetch(`/spelers/${id}`);
-                if (!res.ok) throw new Error("Speler niet gevonden");
-                const s = await res.json();
-
-                detailContent.innerHTML = `
-              <button id="closeBtn" aria-label="Sluit details">&times;</button>
-              <h2 id="detailTitle">${s.name}</h2>
-              <img src="${s.imageUrl}" alt="Foto van ${s.name}" class="player-img" />
-              <p><strong>Leeftijd:</strong> ${s.age}</p>
-              <p><strong>Positie:</strong> ${s.position}</p>
-              <p><strong>Team:</strong> ${s.team.name}</p>
-              <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
-              <p>${s.description || ""}</p>
-              <p><strong>Hobby's:</strong> ${s.hobbies ? s.hobbies.join(", ") : ""}</p>
-            `;
-
-                detailContent.querySelector("#closeBtn").addEventListener("click", sluitDetail);
-
-                detailOverlay.style.display = "flex";
-                detailContent.querySelector("#closeBtn").focus();
-            } catch (error) {
-                alert("Fout bij laden details: " + error.message);
-            }
-        }
-
-        function sluitDetail() {
-            detailOverlay.style.display = "none";
-            filterInput.focus();
-        }
-
-        closeBtn.addEventListener("click", sluitDetail);
-
-        filterInput.addEventListener("input", filterEnToonSpelers);
-
-        sortArrow.addEventListener("click", () => {
-            sortAsc = !sortAsc;
-            sortArrow.textContent = sortAsc ? "▼" : "▲"; // ▼ = A-Z, ▲ = Z-A
-            filterEnToonSpelers();
+      document.querySelectorAll(".speler").forEach(el => {
+        el.addEventListener("click", () => toonDetail(el.dataset.id));
+        el.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toonDetail(el.dataset.id);
+          }
         });
+      });
+    }
 
-        sortArrow.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                sortAsc = !sortAsc;
-                sortArrow.textContent = sortAsc ? "▼" : "▲";
-                filterEnToonSpelers();
-            }
-        });
+    async function toonDetail(id) {
+      const res = await fetch(`/spelers/${id}`);
+      const s = await res.json();
+      detailContent.innerHTML = `
+                <button id="closeBtn">&times;</button>
+                <h2 id="detailTitle">${s.name}</h2>
+                <img src="${s.imageUrl}" alt="${s.name}" class="player-img" />
+                <p><strong>Leeftijd:</strong> ${s.age}</p>
+                <p><strong>Positie:</strong> ${s.position}</p>
+                <p><strong>Team:</strong> ${s.team.name}</p>
+                <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
+                <p>${s.description || ""}</p>
+                <p><strong>Hobby's:</strong> ${s.hobbies ? s.hobbies.join(", ") : ""}</p>`;
 
-        (async () => {
-            await haalSpelersOp();
-            maakTeamCheckboxes();
-            filterEnToonSpelers();
-        })();
-    </script>
+      detailContent.querySelector("#closeBtn").addEventListener("click", sluitDetail);
+      detailOverlay.style.display = "flex";
+    }
 
+    function sluitDetail() {
+      detailOverlay.style.display = "none";
+    }
+
+    filterInput.addEventListener("input", filterEnToonSpelers);
+    closeBtn.addEventListener("click", sluitDetail);
+
+    sortButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const veld = btn.dataset.sort;
+        huidigeSort.veld = veld;
+        huidigeSort.richting *= -1;
+        btn.querySelector(".arrow").innerHTML = huidigeSort.richting === 1 ? "&#x25B2;" : "&#x25BC;";
+        filterEnToonSpelers();
+      });
+    });
+
+    (async () => {
+      await haalSpelersOp();
+      maakTeamCheckboxes();
+      filterEnToonSpelers();
+    })();
+  </script>
 </body>
 
 </html>

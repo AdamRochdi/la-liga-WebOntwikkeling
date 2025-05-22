@@ -1,27 +1,26 @@
 [
-    {
-      "id": 101,
-      "name": "Fc Barcelona",
-      "stadium": "Camp Nou",
-      "founded": 1899,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/AtleticoMadrid.png",
-      "isChampion": true
-    },
-    {
-      "id": 102,
-      "name": "Real Madrid",
-      "stadium": "Santiago Bernabéu",
-      "founded": 1902,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
-      "isChampion": false
-    },
-    {
-      "id": 103,
-      "name": "Atletico Madrid",
-      "stadium": "Estadio Metropolitano",
-      "founded": 1903,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
-      "isChampion": false
-    }
-  ]
-  
+  {
+    "id": 101,
+    "name": "Fc Barcelona",
+    "stadium": "Camp Nou",
+    "founded": 1899,
+    "imageUrl": "/images/AtleticoMadrid.png",
+    "isChampion": true
+  },
+  {
+    "id": 102,
+    "name": "Real Madrid",
+    "stadium": "Santiago Bernabéu",
+    "founded": 1902,
+    "imageUrl": "/images/RealMadrid.png",
+    "isChampion": false
+  },
+  {
+    "id": 103,
+    "name": "Atletico Madrid",
+    "stadium": "Estadio Metropolitano",
+    "founded": 1903,
+    "imageUrl": "/images/Barcelona.png",
+    "isChampion": false
+  }
+]

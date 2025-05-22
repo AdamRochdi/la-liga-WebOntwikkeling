@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Spelers overzicht</title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+        <h1>Spelers overzicht</h1>
+
+        <form method="get" action="/spelers">
+            <input type="text" name="filter" placeholder="Filter op naam" value="<%= filter %>" />
+            <select name="sortField">
+                <option value="name" <%=sortField==='name' ? 'selected' : '' %>>Naam</option>
+                <option value="age" <%=sortField==='age' ? 'selected' : '' %>>Leeftijd</option>
+                <option value="position" <%=sortField==='position' ? 'selected' : '' %>>Positie</option>
+            </select>
+            <select name="sortOrder">
+                <option value="asc" <%=sortOrder==='asc' ? 'selected' : '' %>>Oplopend</option>
+                <option value="desc" <%=sortOrder==='desc' ? 'selected' : '' %>>Aflopend</option>
+            </select>
+            <button type="submit">Zoeken</button>
+        </form>
+
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Leeftijd</th>
+                    <th>Positie</th>
+                    <th>Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% spelers.forEach(speler=> { %>
+                    <tr>
+                        <td><a href="/spelers/<%= speler.id %>">
+                                <%= speler.name %>
+                            </a></td>
+                        <td>
+                            <%= speler.age %>
+                        </td>
+                        <td>
+                            <%= speler.position %>
+                        </td>
+                        <td>
+                            <%= speler.team.name %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+
+</body>
+
+</html>

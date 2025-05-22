@@ -1,14 +1,13 @@
-import path from "path";
 import express from "express";
-import spelersRouter from "./routes/spelers.js";
+import spelersRouter from "./routes/spelers.js"; // .js als je ES modules gebruikt
 const app = express();
-const port = 3000;
-app.set("view engine", "ejs");
-app.set("views", path.resolve("./views"));
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
+// Hier koppel je je router
 app.use("/spelers", spelersRouter);
-// Eventueel: serveer static files (als je die hebt)
-app.use(express.static(path.resolve("./public")));
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
+// Optioneel: voeg een eenvoudige root route toe
+app.get("/", (req, res) => {
+    res.send("Welkom op de API van La Liga!");
+});
+app.listen(PORT, () => {
+    console.log(`Server draait op http://localhost:${PORT}`);
 });

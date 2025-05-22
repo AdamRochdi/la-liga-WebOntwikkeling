@@ -1,6 +1,7 @@
-<nav style="background-color:#333; padding:10px;">
-  <a href="/" style="color:#fff; margin-right:15px; text-decoration:none; font-weight:bold;">La Liga</a>
-  <a href="/spelers" style="color:#fff; margin-right:15px; text-decoration:none;">Spelers</a>
-  <a href="/teams" style="color:#fff; margin-right:15px; text-decoration:none;">Teams</a>
-  <!-- Voeg hier meer links toe als nodig -->
+<nav id="mainNav" role="navigation" aria-label="Hoofd navigatie">
+  <ul>
+    <li><a href="#" class="nav-link <%= active === 'players' ? 'active' : '' %>" data-section="players">Players</a></li>
+    <li><a href="#" class="nav-link <%= active === 'clubs' ? 'active' : '' %>" data-section="clubs">Clubs</a></li>
+    <li><a href="#" class="nav-link <%= active === 'user' ? 'active' : '' %>" data-section="user">User</a></li>
+  </ul>
 </nav>

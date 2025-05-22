@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/la-liga.png" type="image/x-icon" />
+
     <title>La Liga Spelers</title>
     <style>
         body {
@@ -20,13 +22,61 @@
             margin-bottom: 1rem;
         }
 
+        #filterWrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         #filterInput {
-            width: 100%;
+            flex-grow: 1;
             padding: 0.7rem 1rem;
             font-size: 1.1rem;
-            border-radius: 6px;
+            border-radius: 6px 0 0 6px;
             border: 1.5px solid #ccc;
+            border-right: none;
+            outline-offset: -2px;
+            cursor: text;
+        }
+
+        #sortArrow {
+            user-select: none;
+            font-size: 1.3rem;
+            padding: 0 12px;
+            background: #eee;
+            border: 1.5px solid #ccc;
+            border-left: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        #sortArrow:hover {
+            background-color: #ddd;
+        }
+
+        /* Team filter checkboxes container */
+        #clubFilters {
             margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        #clubFilters label {
+            margin-right: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #clubFilters input[type="checkbox"] {
+            margin-right: 6px;
+            cursor: pointer;
         }
 
         #spelersContainer {
@@ -148,7 +198,14 @@
 
     <h1>La Liga Spelers</h1>
 
-    <input id="filterInput" type="text" placeholder="Filter spelers op naam..." aria-label="Filter spelers op naam" />
+    <div id="filterWrapper">
+        <input id="filterInput" type="text" placeholder="Filter spelers op naam..."
+            aria-label="Filter spelers op naam" />
+        <span id="sortArrow" aria-label="Sorteer spelers A tot Z of Z tot A" role="button" tabindex="0">▼</span>
+    </div>
+
+    <!-- Team filter checkboxes -->
+    <div id="clubFilters" aria-label="Filter op teams" role="group"></div>
 
     <div id="spelersContainer" aria-live="polite"></div>
 
@@ -161,22 +218,70 @@
 
     <script>
         const filterInput = document.getElementById("filterInput");
+        const sortArrow = document.getElementById("sortArrow");
+        const clubFiltersContainer = document.getElementById("clubFilters");
         const spelersContainer = document.getElementById("spelersContainer");
         const detailOverlay = document.getElementById("detailOverlay");
         const detailContent = document.getElementById("detailContent");
         const closeBtn = document.getElementById("closeBtn");
 
-        async function haalSpelersOp(filter = "") {
+        let alleSpelers = [];
+        let sortAsc = true; // true = A-Z, false = Z-A
+
+        async function haalSpelersOp() {
             try {
-                const url = filter ? `/spelers?filter=${encodeURIComponent(filter)}` : "/spelers";
-                const res = await fetch(url);
+                const res = await fetch("/spelers");
                 if (!res.ok) throw new Error("Kon spelers niet laden");
                 const data = await res.json();
-                return data.spelers;
+                alleSpelers = data.spelers || data;
             } catch (error) {
                 spelersContainer.innerHTML = `<p style="color:red;">Fout bij laden spelers: ${error.message}</p>`;
-                return [];
+                alleSpelers = [];
             }
+        }
+
+        function maakTeamCheckboxes() {
+            const uniekeTeams = [...new Set(alleSpelers.map(s => s.team.name))].sort();
+
+            clubFiltersContainer.innerHTML = "";
+            uniekeTeams.forEach(team => {
+                const label = document.createElement("label");
+                label.htmlFor = `team-${team.replace(/\s+/g, "")}`;
+                label.textContent = team;
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.value = team;
+                checkbox.name = "teamFilter";
+                checkbox.id = `team-${team.replace(/\s+/g, "")}`;
+                checkbox.checked = true;
+
+                label.prepend(checkbox);
+                clubFiltersContainer.appendChild(label);
+
+                checkbox.addEventListener("change", filterEnToonSpelers);
+            });
+        }
+
+        function sortPlayersByName(spelers) {
+            return spelers.sort((a, b) => {
+                if (a.name.toLowerCase() < b.name.toLowerCase()) return sortAsc ? -1 : 1;
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return sortAsc ? 1 : -1;
+                return 0;
+            });
+        }
+
+        function filterEnToonSpelers() {
+            const zoekterm = filterInput.value.trim().toLowerCase();
+            const geselecteerdeTeams = Array.from(document.querySelectorAll('input[name="teamFilter"]:checked')).map(cb => cb.value);
+
+            let gefilterdeSpelers = alleSpelers.filter(speler =>
+                speler.name.toLowerCase().includes(zoekterm) &&
+                geselecteerdeTeams.includes(speler.team.name)
+            );
+
+            gefilterdeSpelers = sortPlayersByName(gefilterdeSpelers);
+            toonSpelers(gefilterdeSpelers);
         }
 
         function toonSpelers(spelers) {
@@ -187,14 +292,13 @@
             spelersContainer.innerHTML = spelers
                 .map(
                     (s) => `
-      <div class="speler" tabindex="0" role="button" aria-pressed="false" data-id="${s.id}">
-        <img src="${s.imageUrl}" alt="${s.name}" />
-        <span>${s.name}</span>
-      </div>`
+            <div class="speler" tabindex="0" role="button" aria-pressed="false" data-id="${s.id}">
+              <img src="${s.imageUrl}" alt="Foto van ${s.name}" />
+              <span>${s.name}</span>
+            </div>`
                 )
                 .join("");
 
-            // Event listeners voor klikken en toetsen (toegankelijkheid)
             document.querySelectorAll(".speler").forEach((el) => {
                 el.addEventListener("click", () => toonDetail(el.dataset.id));
                 el.addEventListener("keydown", (e) => {
@@ -213,23 +317,21 @@
                 const s = await res.json();
 
                 detailContent.innerHTML = `
-        <button id="closeBtn" aria-label="Sluit details">&times;</button>
-        <h2 id="detailTitle">${s.name}</h2>
-        <img src="${s.imageUrl}" alt="${s.name}" class="player-img" />
-        <p><strong>Leeftijd:</strong> ${s.age}</p>
-        <p><strong>Positie:</strong> ${s.position}</p>
-        <p><strong>Team:</strong> ${s.team.name}</p>
-        <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
-        <p>${s.description}</p>
-        <p><strong>Hobby's:</strong> ${s.hobbies.join(", ")}</p>
-      `;
+              <button id="closeBtn" aria-label="Sluit details">&times;</button>
+              <h2 id="detailTitle">${s.name}</h2>
+              <img src="${s.imageUrl}" alt="Foto van ${s.name}" class="player-img" />
+              <p><strong>Leeftijd:</strong> ${s.age}</p>
+              <p><strong>Positie:</strong> ${s.position}</p>
+              <p><strong>Team:</strong> ${s.team.name}</p>
+              <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
+              <p>${s.description || ""}</p>
+              <p><strong>Hobby's:</strong> ${s.hobbies ? s.hobbies.join(", ") : ""}</p>
+            `;
 
-                // Sluit knop opnieuw selecteren (want inhoud vervangen)
-                const closeButton = detailContent.querySelector("#closeBtn");
-                closeButton.addEventListener("click", sluitDetail);
+                detailContent.querySelector("#closeBtn").addEventListener("click", sluitDetail);
 
                 detailOverlay.style.display = "flex";
-                closeButton.focus();
+                detailContent.querySelector("#closeBtn").focus();
             } catch (error) {
                 alert("Fout bij laden details: " + error.message);
             }
@@ -242,15 +344,27 @@
 
         closeBtn.addEventListener("click", sluitDetail);
 
-        filterInput.addEventListener("input", async () => {
-            const spelers = await haalSpelersOp(filterInput.value);
-            toonSpelers(spelers);
+        filterInput.addEventListener("input", filterEnToonSpelers);
+
+        sortArrow.addEventListener("click", () => {
+            sortAsc = !sortAsc;
+            sortArrow.textContent = sortAsc ? "▼" : "▲"; // ▼ = A-Z, ▲ = Z-A
+            filterEnToonSpelers();
         });
 
-        // Init
+        sortArrow.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                sortAsc = !sortAsc;
+                sortArrow.textContent = sortAsc ? "▼" : "▲";
+                filterEnToonSpelers();
+            }
+        });
+
         (async () => {
-            const spelers = await haalSpelersOp();
-            toonSpelers(spelers);
+            await haalSpelersOp();
+            maakTeamCheckboxes();
+            filterEnToonSpelers();
         })();
     </script>
 

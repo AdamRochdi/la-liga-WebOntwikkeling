@@ -1,60 +1,209 @@
 [
-    {
-      "id": 1,
-      "name": "Jamal Musiala",
-      "description": "Veelbelovende aanvallende middenvelder met een uitstekende techniek en dribbelvaardigheden.",
-      "age": 20,
-      "isActive": true,
-      "birthdate": "2003-02-26",
-      "imageUrl": "images/musiala.jpg",
-      "position": "Middenvelder",
-      "hobbies": ["Muziek", "Schaken", "Reizen"],
-      "team": {
-        "id": 101,
-        "name": "FC Bayern München",
-        "stadium": "Allianz Arena",
-        "founded": 1900,
-        "imageUrl": "images/bayern.png",
-        "isChampion": true
-      }
-    },
-    {
-      "id": 2,
-      "name": "Jude Bellingham",
-      "description": "Een energieke middenvelder die zowel defensief als offensief sterk is.",
-      "age": 20,
-      "isActive": true,
-      "birthdate": "2003-06-29",
-      "imageUrl": "images/bellingham.jpg",
-      "position": "Middenvelder",
-      "hobbies": ["Lezen", "FIFA spelen", "Basketbal"],
-      "team": {
-        "id": 102,
-        "name": "Borussia Dortmund",
-        "stadium": "Signal Iduna Park",
-        "founded": 1909,
-        "imageUrl": "images/dortmund.png",
-        "isChampion": false
-      }
-    },
-    {
-      "id": 3,
-      "name": "Florian Wirtz",
-      "description": "Een creatief spelverdeler met een geweldig overzicht en uitstekende passing.",
-      "age": 21,
-      "isActive": true,
-      "birthdate": "2002-05-03",
-      "imageUrl": "images/wirtz.jpg",
-      "position": "Middenvelder",
-      "hobbies": ["Gamen", "Films kijken", "Paardrijden"],
-      "team": {
-        "id": 103,
-        "name": "Bayer Leverkusen",
-        "stadium": "BayArena",
-        "founded": 1904,
-        "imageUrl": "images/leverkusen.png",
-        "isChampion": false
-      }
+  {
+    "id": 1,
+    "name": "Kylian Mbappé",
+    "description": "Een razendsnelle aanvaller met uitzonderlijk afwerkingsvermogen en explosiviteit.",
+    "age": 26,
+    "isActive": true,
+    "birthdate": "1998-12-20",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Mbappe.jpeg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Mode",
+      "Videogames",
+      "Reizen"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "isChampion": false
     }
-  ]
-  
+  },
+  {
+    "id": 2,
+    "name": "Vinícius Jr.",
+    "description": "Een technische dribbelaar met flair, creativiteit en snelheid op de flanken.",
+    "age": 24,
+    "isActive": true,
+    "birthdate": "2000-07-12",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/vinicius.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Dansen",
+      "Gamen",
+      "Muziek luisteren"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 3,
+    "name": "Jude Bellingham",
+    "description": "Een complete middenvelder met scorend vermogen en leiderschap op jonge leeftijd.",
+    "age": 21,
+    "isActive": true,
+    "birthdate": "2003-06-29",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Bellingham.jpg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Lezen",
+      "Voetbal analyseren",
+      "Fitness"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 4,
+    "name": "Lamine Yamal",
+    "description": "Een jong supertalent met techniek, snelheid en lef in het aanvalsspel.",
+    "age": 17,
+    "isActive": true,
+    "birthdate": "2007-07-13",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Jamal.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Gamen",
+      "Sociale media",
+      "FIFA spelen"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 5,
+    "name": "Pedri",
+    "description": "Een slimme middenvelder met geweldige passing en spelinzicht.",
+    "age": 21,
+    "isActive": true,
+    "birthdate": "2002-11-25",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/pedri.jpg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Schaken",
+      "Gamen",
+      "Films kijken"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ronald Araújo",
+    "description": "Een fysieke en betrouwbare centrale verdediger met leiderschapspotentieel.",
+    "age": 25,
+    "isActive": true,
+    "birthdate": "1999-03-07",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Araujo.jpg",
+    "position": "Verdediger",
+    "hobbies": [
+      "Fitness",
+      "Motorrijden",
+      "Muziek luisteren"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 8,
+    "name": "Álvaro Morata",
+    "description": "Een ervaren spits die zowel met het hoofd als voeten gevaarlijk is.",
+    "age": 32,
+    "isActive": true,
+    "birthdate": "1992-10-23",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Morata.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Koken",
+      "Tennis",
+      "Reizen"
+    ],
+    "team": {
+      "id": 103,
+      "name": "Atlético Madrid",
+      "stadium": "Cívitas Metropolitano",
+      "founded": 1903,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/AtleticoMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 9,
+    "name": "Jan Oblak",
+    "description": "Een wereldklasse doelman met snelle reflexen en sterke positionering.",
+    "age": 31,
+    "isActive": true,
+    "birthdate": "1993-01-07",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Oblak.jpg",
+    "position": "Keeper",
+    "hobbies": [
+      "Lezen",
+      "Gamen",
+      "Fietsen"
+    ],
+    "team": {
+      "id": 103,
+      "name": "Atlético Madrid",
+      "stadium": "Cívitas Metropolitano",
+      "founded": 1903,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/AtleticoMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 10,
+    "name": "Frenkie de Jong",
+    "description": "Een elegante controleur op het middenveld met een geweldige dribbel en rust aan de bal.",
+    "age": 27,
+    "isActive": true,
+    "birthdate": "1997-05-12",
+    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Jong.jpeg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Films",
+      "Reizen",
+      "Fitness"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "isChampion": true
+    }
+  }
+]

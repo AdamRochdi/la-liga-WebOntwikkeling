@@ -6,7 +6,7 @@
     "age": 26,
     "isActive": true,
     "birthdate": "1998-12-20",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Mbappe.jpeg",
+    "imageUrl": "/images/Mbappe.jpeg",
     "position": "Aanvaller",
     "hobbies": [
       "Mode",
@@ -18,7 +18,7 @@
       "name": "Real Madrid",
       "stadium": "Santiago Bernabéu",
       "founded": 1902,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "imageUrl": "/images/RealMadrid.png",
       "isChampion": false
     }
   },
@@ -29,7 +29,7 @@
     "age": 24,
     "isActive": true,
     "birthdate": "2000-07-12",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/vinicius.jpg",
+    "imageUrl": "/images/Vinicius.jpeg",
     "position": "Aanvaller",
     "hobbies": [
       "Dansen",
@@ -41,7 +41,7 @@
       "name": "Real Madrid",
       "stadium": "Santiago Bernabéu",
       "founded": 1902,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "imageUrl": "/images/RealMadrid.png",
       "isChampion": false
     }
   },
@@ -52,7 +52,7 @@
     "age": 21,
     "isActive": true,
     "birthdate": "2003-06-29",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Bellingham.jpg",
+    "imageUrl": "/images/Bellingham.jpg",
     "position": "Middenvelder",
     "hobbies": [
       "Lezen",
@@ -64,7 +64,7 @@
       "name": "Real Madrid",
       "stadium": "Santiago Bernabéu",
       "founded": 1902,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/RealMadrid.png",
+      "imageUrl": "/images/RealMadrid.png",
       "isChampion": false
     }
   },
@@ -75,7 +75,7 @@
     "age": 17,
     "isActive": true,
     "birthdate": "2007-07-13",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Jamal.jpg",
+    "imageUrl": "/images/Jamal.jpg",
     "position": "Aanvaller",
     "hobbies": [
       "Gamen",
@@ -87,7 +87,7 @@
       "name": "FC Barcelona",
       "stadium": "Estadi Olímpic Lluís Companys",
       "founded": 1899,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "imageUrl": "/images/Barcelona.png",
       "isChampion": true
     }
   },
@@ -98,7 +98,7 @@
     "age": 21,
     "isActive": true,
     "birthdate": "2002-11-25",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/pedri.jpg",
+    "imageUrl": "/images/pedri.jpg",
     "position": "Middenvelder",
     "hobbies": [
       "Schaken",
@@ -110,7 +110,7 @@
       "name": "FC Barcelona",
       "stadium": "Estadi Olímpic Lluís Companys",
       "founded": 1899,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "imageUrl": "/images/Barcelona.png",
       "isChampion": true
     }
   },
@@ -133,7 +133,7 @@
       "name": "FC Barcelona",
       "stadium": "Estadi Olímpic Lluís Companys",
       "founded": 1899,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "imageUrl": "/images/Barcelona.png",
       "isChampion": true
     }
   },
@@ -144,7 +144,7 @@
     "age": 32,
     "isActive": true,
     "birthdate": "1992-10-23",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Morata.jpg",
+    "imageUrl": "/images/Morata.jpg",
     "position": "Aanvaller",
     "hobbies": [
       "Koken",
@@ -156,7 +156,7 @@
       "name": "Atlético Madrid",
       "stadium": "Cívitas Metropolitano",
       "founded": 1903,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/AtleticoMadrid.png",
+      "imageUrl": "/images/AtleticoMadrid.png",
       "isChampion": false
     }
   },
@@ -167,7 +167,7 @@
     "age": 31,
     "isActive": true,
     "birthdate": "1993-01-07",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Oblak.jpg",
+    "imageUrl": "/images/Oblak.jpg",
     "position": "Keeper",
     "hobbies": [
       "Lezen",
@@ -179,7 +179,7 @@
       "name": "Atlético Madrid",
       "stadium": "Cívitas Metropolitano",
       "founded": 1903,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/AtleticoMadrid.png",
+      "imageUrl": "/images/AtleticoMadrid.png",
       "isChampion": false
     }
   },
@@ -190,7 +190,7 @@
     "age": 27,
     "isActive": true,
     "birthdate": "1997-05-12",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Jong.jpeg",
+    "imageUrl": "/images/Jong.jpeg",
     "position": "Middenvelder",
     "hobbies": [
       "Films",
@@ -202,7 +202,7 @@
       "name": "FC Barcelona",
       "stadium": "Estadi Olímpic Lluís Companys",
       "founded": 1899,
-      "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Barcelona.png",
+      "imageUrl": "/images/Barcelona.png",
       "isChampion": true
     }
   }

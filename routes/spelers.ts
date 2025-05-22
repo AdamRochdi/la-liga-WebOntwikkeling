@@ -2,18 +2,17 @@ import { Router, Request, Response } from "express";
 import fetch from "node-fetch";
 import { Speler } from "../interfaces";
 
-
 const router = Router();
 
+// Gewijzigde, correcte raw GitHub URL
 const SPELERS_JSON_URL =
-    "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/spelers.json";
+    "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json";
 
 router.get("/", async (req: Request, res: Response) => {
     try {
         const response = await fetch(SPELERS_JSON_URL);
         if (!response.ok) throw new Error("Failed to fetch spelers data");
 
-        // Type assertion toevoegen:
         let spelers = (await response.json()) as Speler[];
 
         const filter = (req.query.filter as string) || "";
@@ -44,7 +43,6 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
-
 router.get("/:id", async (req: Request, res: Response) => {
     try {
         const response = await fetch(SPELERS_JSON_URL);
@@ -67,6 +65,5 @@ router.get("/:id", async (req: Request, res: Response) => {
         res.status(500).send("Er is een fout opgetreden: " + error);
     }
 });
-
 
 export default router;

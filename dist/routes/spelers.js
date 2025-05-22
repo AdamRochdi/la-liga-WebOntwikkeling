@@ -1,13 +1,13 @@
 import { Router } from "express";
 import fetch from "node-fetch";
 const router = Router();
-const SPELERS_JSON_URL = "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/spelers.json";
+// Gewijzigde, correcte raw GitHub URL
+const SPELERS_JSON_URL = "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json";
 router.get("/", async (req, res) => {
     try {
         const response = await fetch(SPELERS_JSON_URL);
         if (!response.ok)
             throw new Error("Failed to fetch spelers data");
-        // Type assertion toevoegen:
         let spelers = (await response.json());
         const filter = req.query.filter || "";
         if (filter) {

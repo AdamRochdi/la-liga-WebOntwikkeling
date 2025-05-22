@@ -1,13 +1,16 @@
-import express from 'express';
-import spelersRouter from './routes/spelers.js'; // let op: .js als je ES modules gebruikt
+import express from "express";
+import path from "path";
+import clubsRouter from "./routes/clubs";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-app.use(express.static('public'));
+// Serve static files from /public folder
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use('/spelers', spelersRouter);
+// API route for clubs
+app.use("/clubs", clubsRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server draait op http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

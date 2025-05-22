@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>
+        <%= club.name %> - Detailpagina
+    </title>
+    <style>
+        img {
+            max-width: 200px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+        <h1>
+            <%= club.name %>
+        </h1>
+        <img src="<%= club.imageUrl %>" alt="Logo van <%= club.name %>" />
+        <p><strong>Stadion:</strong>
+            <%= club.stadium %>
+        </p>
+        <p><strong>Oprichtingsjaar:</strong>
+            <%= club.founded %>
+        </p>
+        <p><strong>Kampioen:</strong>
+            <%= club.isChampion ? "Ja" : "Nee" %>
+        </p>
+        <p><a href="/clubs">Terug naar overzicht</a></p>
+</body>
+
+</html>

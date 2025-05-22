@@ -29,7 +29,7 @@
     "age": 24,
     "isActive": true,
     "birthdate": "2000-07-12",
-    "imageUrl": "/images/Vinicius.jpeg",
+    "imageUrl": "/images/vinicius.jpg",
     "position": "Aanvaller",
     "hobbies": [
       "Dansen",
@@ -204,6 +204,236 @@
       "founded": 1899,
       "imageUrl": "/images/Barcelona.png",
       "isChampion": true
+    }
+  },
+  {
+    "id": 11,
+    "name": "Marc-André ter Stegen",
+    "description": "Een betrouwbare doelman met uitstekende reflexen en balcontrole, bekend om zijn kalmte onder druk.",
+    "age": 33,
+    "isActive": true,
+    "birthdate": "1992-04-30",
+    "imageUrl": "/images/TerStegen.jpeg",
+    "position": "Keeper",
+    "hobbies": [
+      "Fotografie",
+      "Koken",
+      "Reizen"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 12,
+    "name": "Federico Valverde",
+    "description": "Een dynamische middenvelder met een ongeëvenaarde werkethiek en krachtige schoten van afstand.",
+    "age": 26,
+    "isActive": true,
+    "birthdate": "1998-07-22",
+    "imageUrl": "/images/Valverde.jpg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Hardlopen",
+      "Muziek luisteren",
+      "Familietijd"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 13,
+    "name": "Antoine Griezmann",
+    "description": "Een creatieve aanvaller met een scherp oog voor doel en een uitstekende spelinzicht.",
+    "age": 34,
+    "isActive": true,
+    "birthdate": "1991-03-21",
+    "imageUrl": "/images/Griezman.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Videogames",
+      "Basketbal",
+      "Films kijken"
+    ],
+    "team": {
+      "id": 103,
+      "name": "Atlético Madrid",
+      "stadium": "Cívitas Metropolitano",
+      "founded": 1903,
+      "imageUrl": "/images/AtleticoMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 14,
+    "name": "Aurelien Tchouaméni",
+    "description": "Een krachtige verdedigende middenvelder met uitstekende intercepties en baldistributie.",
+    "age": 25,
+    "isActive": true,
+    "birthdate": "2000-01-27",
+    "imageUrl": "/images/Tchouameni.jpg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Lezen",
+      "Fitness",
+      "Reizen"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 15,
+    "name": "Raphinha",
+    "description": "Een snelle vleugelaanvaller met flair en een neus voor assists.",
+    "age": 28,
+    "isActive": true,
+    "birthdate": "1997-12-14",
+    "imageUrl": "/images/Raphinha.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Dansen",
+      "Gamen",
+      "Muziek luisteren"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 16,
+    "name": "João Félix",
+    "description": "Een technisch begaafde aanvaller met een uitstekend gevoel voor ruimte en timing.",
+    "age": 25,
+    "isActive": true,
+    "birthdate": "1999-11-10",
+    "imageUrl": "/images/Felix.jpg",
+    "position": "Aanvaller",
+    "hobbies": [
+      "Films kijken",
+      "Gamen",
+      "Reizen"
+    ],
+    "team": {
+      "id": 103,
+      "name": "Atlético Madrid",
+      "stadium": "Cívitas Metropolitano",
+      "founded": 1903,
+      "imageUrl": "/images/AtleticoMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 17,
+    "name": "Eduardo Camavinga",
+    "description": "Een veelzijdige middenvelder met een indrukwekkend balgevoel en defensieve kwaliteiten.",
+    "age": 22,
+    "isActive": true,
+    "birthdate": "2002-11-10",
+    "imageUrl": "/images/Camavinga.jpg",
+    "position": "Middenvelder",
+    "hobbies": [
+      "Lezen",
+      "Muziek luisteren",
+      "Fitness"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 18,
+    "name": "Jules Koundé",
+    "description": "Een atletische verdediger met snelheid en uitstekende positionering.",
+    "age": 26,
+    "isActive": true,
+    "birthdate": "1998-11-12",
+    "imageUrl": "/images/Kounde.jpg",
+    "position": "Verdediger",
+    "hobbies": [
+      "Mode",
+      "Muziek luisteren",
+      "Reizen"
+    ],
+    "team": {
+      "id": 102,
+      "name": "FC Barcelona",
+      "stadium": "Estadi Olímpic Lluís Companys",
+      "founded": 1899,
+      "imageUrl": "/images/Barcelona.png",
+      "isChampion": true
+    }
+  },
+  {
+    "id": 19,
+    "name": "Thibaut Courtois",
+    "description": "Een wereldklasse doelman bekend om zijn lengte, reflexen en kalmte onder druk.",
+    "age": 33,
+    "isActive": true,
+    "birthdate": "1992-05-11",
+    "imageUrl": "/images/Courtois.jpeg",
+    "position": "Keeper",
+    "hobbies": [
+      "Basketbal",
+      "Gamen",
+      "Reizen"
+    ],
+    "team": {
+      "id": 101,
+      "name": "Real Madrid",
+      "stadium": "Santiago Bernabéu",
+      "founded": 1902,
+      "imageUrl": "/images/RealMadrid.png",
+      "isChampion": false
+    }
+  },
+  {
+    "id": 20,
+    "name": "José María Giménez",
+    "description": "Een robuuste centrale verdediger met leiderschap en sterke luchtduels.",
+    "age": 30,
+    "isActive": true,
+    "birthdate": "1995-01-20",
+    "imageUrl": "/images/Jose.jpeg",
+    "position": "Verdediger",
+    "hobbies": [
+      "Fitness",
+      "Muziek luisteren",
+      "Familietijd"
+    ],
+    "team": {
+      "id": 103,
+      "name": "Atlético Madrid",
+      "stadium": "Cívitas Metropolitano",
+      "founded": 1903,
+      "imageUrl": "/images/AtleticoMadrid.png",
+      "isChampion": false
     }
   }
 ]

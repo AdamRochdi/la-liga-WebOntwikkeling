@@ -121,7 +121,7 @@
     "age": 25,
     "isActive": true,
     "birthdate": "1999-03-07",
-    "imageUrl": "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/images/Araujo.jpg",
+    "imageUrl": "/images/Araujo.jpg",
     "position": "Verdediger",
     "hobbies": [
       "Fitness",

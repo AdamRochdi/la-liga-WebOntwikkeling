@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Liga Spelers</title>
+    <style>
+        /* Reset en base styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 2rem auto;
+            max-width: 900px;
+            background: #f5f8fa;
+            color: #333;
+            padding: 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #222;
+            font-weight: 700;
+        }
+
+        /* Filter input */
+        #filterInput {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1.5px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.25s ease;
+        }
+
+        #filterInput:focus {
+            outline: none;
+            border-color: #0052cc;
+            box-shadow: 0 0 6px rgba(0, 82, 204, 0.3);
+        }
+
+        /* Container van spelers */
+        #spelersContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Speler card */
+        .speler {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: default;
+        }
+
+        .speler:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .speler img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 2px solid #0052cc;
+            flex-shrink: 0;
+            background-color: #eaeaea;
+        }
+
+        .speler div {
+            flex: 1;
+        }
+
+        .speler h2 {
+            margin: 0 0 0.25rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #0052cc;
+        }
+
+        .speler p {
+            margin: 0.2rem 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Loader */
+        #loader {
+            text-align: center;
+            color: #0052cc;
+            font-weight: 600;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        /* Foutmelding */
+        #errorMsg {
+            color: #cc0000;
+            font-weight: 600;
+            margin-top: 2rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>La Liga Spelers</h1>
+    <input type="text" id="filterInput" placeholder="Filter op naam..." autocomplete="off"
+        aria-label="Filter spelers op naam" />
+    <div id="spelersContainer" aria-live="polite"></div>
+    <div id="loader">Laden...</div>
+    <div id="errorMsg">Er is iets misgegaan bij het laden van spelers.</div>
+
+    <script>
+        const filterInput = document.getElementById("filterInput");
+        const spelersContainer = document.getElementById("spelersContainer");
+        const loader = document.getElementById("loader");
+        const errorMsg = document.getElementById("errorMsg");
+
+        async function haalSpelersOp(filter = "") {
+            try {
+                loader.style.display = "block";
+                errorMsg.style.display = "none";
+                const url = filter ? `/spelers?filter=${encodeURIComponent(filter)}` : "/spelers";
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("Netwerkfout");
+                const data = await res.json();
+                return data.spelers || data;
+            } catch (err) {
+                errorMsg.style.display = "block";
+                console.error(err);
+                return [];
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        function toonSpelers(spelers) {
+            spelersContainer.innerHTML = "";
+
+            if (spelers.length === 0) {
+                spelersContainer.innerHTML = `<p>Geen spelers gevonden.</p>`;
+                return;
+            }
+
+            spelers.forEach(speler => {
+                const div = document.createElement("div");
+                div.className = "speler";
+                div.innerHTML = `
+          <img src="${speler.imageUrl}" alt="Foto van ${speler.name}" loading="lazy" />
+          <div>
+            <h2>${speler.name}</h2>
+            <p><strong>Leeftijd:</strong> ${speler.age}</p>
+            <p><strong>Positie:</strong> ${speler.position}</p>
+            <p><strong>Team:</strong> ${speler.team.name}</p>
+          </div>
+        `;
+                spelersContainer.appendChild(div);
+            });
+        }
+
+        async function updateSpelers() {
+            const filter = filterInput.value.trim();
+            const spelers = await haalSpelersOp(filter);
+            toonSpelers(spelers);
+        }
+
+        filterInput.addEventListener("input", () => {
+            // debounce zodat je niet bij elke toets meteen fetch doet
+            clearTimeout(filterInput._timeout);
+            filterInput._timeout = setTimeout(updateSpelers, 300);
+        });
+
+        // Init load
+        updateSpelers();
+    </script>
+</body>
+
+</html>

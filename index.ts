@@ -4,8 +4,11 @@ import { fileURLToPath } from "url";  // Needed for __dirname workaround
 import clubsRouter from "./routes/clubs.js";
 import spelersRouter from "./routes/spelers.js";
 import { connectDB } from "./db.js";
-import { Club } from "./models/Clubs.js";
 import fetch from "node-fetch";
+import { Club } from "./models/Clubs.js";
+import Speler from './models/Speler.js';
+
+
 
 // ESM workaround for __dirname:
 const __filename = fileURLToPath(import.meta.url);
@@ -33,9 +36,26 @@ async function initializeData() {
   }
 }
 
+async function initializeSpelers() {
+  await Speler.deleteMany({});
+
+  const count = await Speler.countDocuments();
+  if (count === 0) {
+    console.log("Geen spelers in DB, data ophalen en importeren...");
+    const response = await fetch("https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json");
+    const spelers = await response.json();
+    await Speler.insertMany(spelers);
+    console.log("Spelers geïmporteerd in MongoDB.");
+  } else {
+    console.log("Spelers al aanwezig in database.");
+  }
+}
+
+
 (async () => {
   await connectDB();
   await initializeData();
+  await initializeSpelers();
 
   app.listen(PORT, () => {
     console.log(`Server draait op http://localhost:${PORT}`);

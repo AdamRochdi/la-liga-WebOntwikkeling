@@ -8,6 +8,7 @@
 
 <body>
     <%- include('partials/navbar') %>
+
         <h1>Spelers overzicht</h1>
 
         <form method="get" action="/spelers">
@@ -31,14 +32,17 @@
                     <th>Leeftijd</th>
                     <th>Positie</th>
                     <th>Team</th>
+                    <th>Bewerken</th>
                 </tr>
             </thead>
             <tbody>
                 <% spelers.forEach(speler=> { %>
                     <tr>
-                        <td><a href="/spelers/<%= speler.id %>">
+                        <td>
+                            <a href="/spelers/<%= speler._id %>">
                                 <%= speler.name %>
-                            </a></td>
+                            </a>
+                        </td>
                         <td>
                             <%= speler.age %>
                         </td>
@@ -46,8 +50,9 @@
                             <%= speler.position %>
                         </td>
                         <td>
-                            <%= speler.team.name %>
+                            <%= speler.team?.name || 'Onbekend' %>
                         </td>
+                        <td><a href="/spelers/<%= speler._id %>/edit">Bewerk</a></td>
                     </tr>
                     <% }) %>
             </tbody>

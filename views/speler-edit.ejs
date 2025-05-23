@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Speler bewerken</title>
+</head>
+
+<body>
+    <h1>Speler bewerken</h1>
+
+    <form method="post" action="/spelers/<%= speler._id %>/edit">
+        <label>
+            Naam:
+            <input type="text" name="name" value="<%= speler.name %>" required />
+        </label><br />
+
+        <label>
+            Leeftijd:
+            <input type="number" name="age" value="<%= speler.age || '' %>" min="0" />
+        </label><br />
+
+        <label>
+            Positie:
+            <select name="position" required>
+                <option value="Doelman" <%=speler.position==='Doelman' ? 'selected' : '' %>>Doelman</option>
+                <option value="Verdediger" <%=speler.position==='Verdediger' ? 'selected' : '' %>>Verdediger</option>
+                <option value="Middenvelder" <%=speler.position==='Middenvelder' ? 'selected' : '' %>>Middenvelder
+                </option>
+                <option value="Aanvaller" <%=speler.position==='Aanvaller' ? 'selected' : '' %>>Aanvaller</option>
+            </select>
+        </label><br />
+
+        <label>
+            Actief:
+            <select name="isActive" required>
+                <option value="true" <%=speler.isActive ? 'selected' : '' %>>Ja</option>
+                <option value="false" <%=!speler.isActive ? 'selected' : '' %>>Nee</option>
+            </select>
+        </label><br />
+
+        <label>
+            Beschrijving:
+            <textarea name="description"><%= speler.description || '' %></textarea>
+        </label><br />
+
+        <label>
+            Geboortedatum:
+            <input type="date" name="birthdate"
+                value="<%= speler.birthdate ? new Date(speler.birthdate).toISOString().substring(0, 10) : '' %>" />
+        </label><br />
+
+        <label>
+            Hobby's (komma gescheiden):
+            <input type="text" name="hobbies" value="<%= speler.hobbies ? speler.hobbies.join(', ') : '' %>" />
+        </label><br />
+
+        <label>
+            Image URL:
+            <input type="text" name="imageUrl" value="<%= speler.imageUrl || '' %>" />
+        </label><br />
+
+        <button type="submit">Opslaan</button>
+    </form>
+
+    <a href="/spelers/<%= speler._id %>">Annuleren</a>
+</body>
+
+</html>

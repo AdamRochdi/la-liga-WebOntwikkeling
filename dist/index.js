@@ -30,7 +30,6 @@ async function initializeData() {
     }
 }
 async function initializeSpelers() {
-    await Speler.deleteMany({});
     const count = await Speler.countDocuments();
     if (count === 0) {
         console.log("Geen spelers in DB, data ophalen en importeren...");

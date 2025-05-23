@@ -235,9 +235,18 @@
     let huidigeSort = { veld: "name", richting: 1 };
 
     async function haalSpelersOp() {
-      const res = await fetch("/spelers");
-      const data = await res.json();
-      alleSpelers = data.spelers || data;
+      try {
+        const res = await fetch("/spelers");
+        if (!res.ok) {
+          const error = await res.json();
+          console.error("Fout bij ophalen spelers:", error.error || error);
+          return;
+        }
+        const data = await res.json();
+        alleSpelers = data.spelers || data;
+      } catch (err) {
+        console.error("Netwerkfout bij ophalen spelers:", err);
+      }
     }
 
     function maakTeamCheckboxes() {
@@ -278,10 +287,10 @@
 
     function toonSpelers(spelers) {
       spelersContainer.innerHTML = spelers.map(s => `
-                <div class="speler" tabindex="0" data-id="${s.id}">
-                    <img src="${s.imageUrl}" alt="${s.name}" />
-                    <span>${s.name}</span>
-                </div>`).join("");
+          <div class="speler" tabindex="0" data-id="${s._id}">
+              <img src="${s.imageUrl}" alt="${s.name}" />
+              <span>${s.name}</span>
+          </div>`).join("");
 
       document.querySelectorAll(".speler").forEach(el => {
         el.addEventListener("click", () => toonDetail(el.dataset.id));
@@ -294,22 +303,37 @@
       });
     }
 
-    async function toonDetail(id) {
-      const res = await fetch(`/spelers/${id}`);
-      const s = await res.json();
-      detailContent.innerHTML = `
-                <button id="closeBtn">&times;</button>
-                <h2 id="detailTitle">${s.name}</h2>
-                <img src="${s.imageUrl}" alt="${s.name}" class="player-img" />
-                <p><strong>Leeftijd:</strong> ${s.age}</p>
-                <p><strong>Positie:</strong> ${s.position}</p>
-                <p><strong>Team:</strong> ${s.team.name}</p>
-                <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
-                <p>${s.description || ""}</p>
-                <p><strong>Hobby's:</strong> ${s.hobbies ? s.hobbies.join(", ") : ""}</p>`;
 
-      detailContent.querySelector("#closeBtn").addEventListener("click", sluitDetail);
-      detailOverlay.style.display = "flex";
+    async function toonDetail(id) {
+      try {
+        const res = await fetch(`/spelers/${id}`);
+        if (!res.ok) {
+          const error = await res.json();
+          alert("Fout: " + (error.error || "Onbekende fout"));
+          return;
+        }
+        const s = await res.json();
+        detailContent.innerHTML = `
+  <button id="closeBtn" aria-label="Sluit details">&times;</button>
+  <h2 id="detailTitle">${s.name}</h2>
+  <img src="${s.imageUrl}" alt="${s.name}" class="player-img" />
+  <p><strong>Leeftijd:</strong> ${s.age}</p>
+  <p><strong>Positie:</strong> ${s.position}</p>
+  <p><strong>Team:</strong> ${s.team.name}</p>
+  <img src="${s.team.imageUrl}" alt="Logo ${s.team.name}" class="team-img" />
+  <p>${s.description || ""}</p>
+  <p><strong>Hobby's:</strong> ${s.hobbies ? s.hobbies.join(", ") : ""}</p>
+  <p style="text-align: center; margin-top: 1rem;">
+    <a href="/spelers/${s._id}/edit" style="font-weight: bold; color: #0077cc; text-decoration: none;">✏️ Speler bewerken</a>
+  </p>`;
+
+
+        detailContent.querySelector("#closeBtn").addEventListener("click", sluitDetail);
+        detailOverlay.style.display = "flex";
+      } catch (err) {
+        alert("Netwerkfout bij ophalen details.");
+        console.error("Netwerkfout bij ophalen details:", err);
+      }
     }
 
     function sluitDetail() {
@@ -335,6 +359,7 @@
       filterEnToonSpelers();
     })();
   </script>
+
 </body>
 
 </html>

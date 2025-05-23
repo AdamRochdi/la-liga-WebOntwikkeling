@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8" />
-  <title><%= speler.name %> - Detailpagina</title>
+  <title>
+    <%= speler.name %> - Detailpagina
+  </title>
   <style>
     img {
       max-width: 200px;
     }
   </style>
 </head>
+
 <body>
   <%- include('partials/navbar') %>
-  <h1><%= speler.name %></h1>
-  <img src="<%= speler.imageUrl %>" alt="Foto van <%= speler.name %>" />
-  <p><strong>Leeftijd:</strong> <%= speler.age %></p>
-  <p><strong>Positie:</strong> <%= speler.position %></p>
-  <p><strong>Team:</strong> <%= speler.team.name %></p>
-  <p><strong>Geboortedatum:</strong> <%= speler.birthdate %></p>
-  <p><strong>Beschrijving:</strong> <%= speler.description %></p>
-  <p><strong>Hobby's:</strong> <%= speler.hobbies.join(", ") %></p>
-  <p><a href="/spelers">Terug naar overzicht</a></p>
+    <h1>
+      <%= speler.name %>
+    </h1>
+    <img src="<%= speler.imageUrl %>" alt="Foto van <%= speler.name %>" />
+    <p><strong>Leeftijd:</strong>
+      <%= speler.age %>
+    </p>
+    <p><strong>Positie:</strong>
+      <%= speler.position %>
+    </p>
+    <p><strong>Team:</strong>
+      <%= speler.team.name %>
+    </p>
+    <p><strong>Geboortedatum:</strong>
+      <%= speler.birthdate %>
+    </p>
+    <p><strong>Beschrijving:</strong>
+      <%= speler.description %>
+    </p>
+    <p><strong>Hobby's:</strong>
+      <%= speler.hobbies ? speler.hobbies.join(", ") : '' %></p>
+
+  <p><a href=" /spelers">Terug naar overzicht</a>
+    </p>
 </body>
+
 </html>

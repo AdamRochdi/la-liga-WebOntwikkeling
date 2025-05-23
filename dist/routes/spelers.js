@@ -1,51 +1,92 @@
 import { Router } from "express";
-import fetch from "node-fetch";
+import Speler from "../models/Speler.js";
+import { Types } from "mongoose";
 const router = Router();
-const SPELERS_JSON_URL = "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json";
+// Lijst van spelers ophalen met filter en sortering uit MongoDB
 router.get("/", async (req, res) => {
     try {
-        const response = await fetch(SPELERS_JSON_URL);
-        if (!response.ok)
-            throw new Error("Failed to fetch spelers data");
-        let spelers = (await response.json());
         const filter = req.query.filter || "";
-        if (filter) {
-            spelers = spelers.filter(s => s.name.toLowerCase().includes(filter.toLowerCase()));
-        }
         const sortField = req.query.sortField || "name";
-        const sortOrder = req.query.sortOrder || "asc";
-        spelers.sort((a, b) => {
-            let aField = a[sortField];
-            let bField = b[sortField];
-            if (typeof aField === "string")
-                aField = aField.toLowerCase();
-            if (typeof bField === "string")
-                bField = bField.toLowerCase();
-            if (aField < bField)
-                return sortOrder === "asc" ? -1 : 1;
-            if (aField > bField)
-                return sortOrder === "asc" ? 1 : -1;
-            return 0;
-        });
-        res.json({ spelers, filter, sortField, sortOrder });
+        const sortOrder = req.query.sortOrder === "desc" ? -1 : 1;
+        const query = filter
+            ? { name: { $regex: filter, $options: "i" } }
+            : {};
+        const spelers = await Speler.find(query)
+            .sort({ [sortField]: sortOrder })
+            .lean();
+        res.json({ spelers, filter, sortField, sortOrder: sortOrder === 1 ? "asc" : "desc" });
     }
-    catch (error) {
-        res.status(500).send("Er is een fout opgetreden: " + error);
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Fout bij ophalen spelers" });
     }
 });
+// Speler detail ophalen (JSON)
 router.get("/:id", async (req, res) => {
     try {
-        const response = await fetch(SPELERS_JSON_URL);
-        if (!response.ok)
-            throw new Error("Failed to fetch spelers data");
-        const data = (await response.json());
-        const speler = data.find(s => s.id === parseInt(req.params.id, 10));
-        if (!speler)
-            return res.status(404).send("Speler niet gevonden");
+        const id = req.params.id;
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Ongeldig ID" });
+        }
+        const speler = await Speler.findById(id).lean();
+        if (!speler) {
+            return res.status(404).json({ error: "Speler niet gevonden" });
+        }
         res.json(speler);
     }
-    catch (error) {
-        res.status(500).send("Er is een fout opgetreden: " + error);
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Fout bij ophalen speler" });
+    }
+});
+// Edit pagina tonen (EJS render)
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Ongeldig ID" });
+        }
+        const speler = await Speler.findById(id).lean();
+        if (!speler) {
+            return res.status(404).json({ error: "Speler niet gevonden" });
+        }
+        res.render("speler-edit", { speler });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Fout bij ophalen speler voor bewerken" });
+    }
+});
+// Edit POST: speler updaten in MongoDB
+router.post("/:id/edit", async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Ongeldig ID" });
+        }
+        const { name, age, position, isActive, description, birthdate, hobbies, imageUrl, } = req.body;
+        const updateData = {
+            name,
+            age: age ? Number(age) : undefined,
+            position,
+            isActive: isActive === "true",
+            description,
+            birthdate: birthdate ? new Date(birthdate) : undefined,
+            imageUrl,
+            hobbies: hobbies ? hobbies.split(",").map((h) => h.trim()) : undefined,
+        };
+        // Verwijder undefined velden, zodat ze niet overschrijven
+        Object.keys(updateData).forEach((key) => {
+            if (updateData[key] === undefined) {
+                delete updateData[key];
+            }
+        });
+        await Speler.findByIdAndUpdate(id, updateData);
+        res.redirect(`/spelers/${id}`);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Fout bij updaten speler" });
     }
 });
 export default router;

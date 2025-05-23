@@ -4,7 +4,7 @@
     "name": "Fc Barcelona",
     "stadium": "Camp Nou",
     "founded": 1899,
-    "imageUrl": "/images/AtleticoMadrid.png",
+    "imageUrl": "/images/Barcelona.png",
     "isChampion": true
   },
   {
@@ -20,7 +20,7 @@
     "name": "Atletico Madrid",
     "stadium": "Estadio Metropolitano",
     "founded": 1903,
-    "imageUrl": "/images/Barcelona.png",
+    "imageUrl": "/images/AtleticoMadrid.png",
     "isChampion": false
   }
 ]

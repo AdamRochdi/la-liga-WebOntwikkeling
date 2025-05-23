@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Club } from "../models/Clubs.js"; // Note: .js extension is required
+import { Club } from "../models/Club.js"; // Named import voor Club en IClub
 const router = Router();
 router.get("/", async (req, res) => {
     try {
@@ -44,7 +44,7 @@ router.put("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
         const updateData = req.body;
-        // Allow updating only these fields
+        // Alleen deze velden mogen geüpdatet worden
         const allowedFields = ["name", "stadium", "founded", "isChampion"];
         const filteredData = {};
         for (const key of allowedFields) {

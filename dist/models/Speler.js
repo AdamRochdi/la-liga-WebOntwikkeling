@@ -11,8 +11,10 @@ const SpelerSchema = new Schema({
     team: {
         id: { type: Number },
         name: { type: String },
-        tla: { type: String },
-        crest: { type: String },
+        stadium: { type: String },
+        founded: { type: Number },
+        imageUrl: { type: String },
+        isChampion: { type: Boolean }
     }
 });
 export default mongoose.model('Speler', SpelerSchema);

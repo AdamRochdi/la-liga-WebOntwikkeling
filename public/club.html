@@ -207,7 +207,8 @@
 
         async function haalClubsOp() {
             const res = await fetch("/clubs");
-            alleClubs = await res.json();
+            const data = await res.json();
+            alleClubs = data.clubs;
         }
 
         function filterEnToonClubs() {

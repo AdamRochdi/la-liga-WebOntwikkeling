@@ -5,7 +5,7 @@ import clubsRouter from "./routes/clubs.js";
 import spelersRouter from "./routes/spelers.js";
 import { connectDB } from "./db.js";
 import fetch from "node-fetch";
-import { Club } from "./models/Clubs.js";
+import { Club } from "./models/Club.js";
 import Speler from './models/Speler.js';
 // ESM workaround for __dirname:
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +30,7 @@ async function initializeData() {
     }
 }
 async function initializeSpelers() {
+    await Speler.deleteMany({});
     const count = await Speler.countDocuments();
     if (count === 0) {
         console.log("Geen spelers in DB, data ophalen en importeren...");

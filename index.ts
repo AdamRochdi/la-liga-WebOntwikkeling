@@ -8,8 +8,6 @@ import fetch from "node-fetch";
 import { Club } from "./models/Club.js";
 import Speler from './models/Speler.js';
 import bcrypt from "bcrypt";
-import { User } from "./models/User.js";
-
 
 
 
@@ -51,29 +49,29 @@ async function initializeSpelers() {
   }
 }
 
-async function initializeUsers() {
-  const adminExists = await User.findOne({ username: "admin" });
-  const userExists = await User.findOne({ username: "user" });
+// async function initializeUsers() {
+//   const adminExists = await User.findOne({ username: "admin" });
+//   const userExists = await User.findOne({ username: "user" });
 
-  if (!adminExists) {
-    const hashedPassword = await bcrypt.hash("admin123", 10);
-    await User.create({ username: "admin", password: hashedPassword, role: "ADMIN" });
-    console.log("👤 Admin gebruiker aangemaakt.");
-  }
+//   if (!adminExists) {
+//     const hashedPassword = await bcrypt.hash("admin123", 10);
+//     await User.create({ username: "admin", password: hashedPassword, role: "ADMIN" });
+//     console.log("👤 Admin gebruiker aangemaakt.");
+//   }
 
-  if (!userExists) {
-    const hashedPassword = await bcrypt.hash("user123", 10);
-    await User.create({ username: "user", password: hashedPassword, role: "USER" });
-    console.log("👤 Gewone gebruiker aangemaakt.");
-  }
-}
+//   if (!userExists) {
+//     const hashedPassword = await bcrypt.hash("user123", 10);
+//     await User.create({ username: "user", password: hashedPassword, role: "USER" });
+//     console.log("👤 Gewone gebruiker aangemaakt.");
+//   }
+// }
 
 
 (async () => {
   await connectDB();
   await initializeData();
   await initializeSpelers();
-  await initializeUsers();
+  // await initializeUsers();
 
   app.listen(PORT, () => {
     console.log(`Serverhost: http://localhost:${PORT}`);

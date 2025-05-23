@@ -1,7 +1,6 @@
 import { Router } from "express";
 import fetch from "node-fetch";
 const router = Router();
-// Gewijzigde, correcte raw GitHub URL
 const SPELERS_JSON_URL = "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json";
 router.get("/", async (req, res) => {
     try {
@@ -11,7 +10,7 @@ router.get("/", async (req, res) => {
         let spelers = (await response.json());
         const filter = req.query.filter || "";
         if (filter) {
-            spelers = spelers.filter((s) => s.name.toLowerCase().includes(filter.toLowerCase()));
+            spelers = spelers.filter(s => s.name.toLowerCase().includes(filter.toLowerCase()));
         }
         const sortField = req.query.sortField || "name";
         const sortOrder = req.query.sortOrder || "asc";
@@ -39,12 +38,8 @@ router.get("/:id", async (req, res) => {
         const response = await fetch(SPELERS_JSON_URL);
         if (!response.ok)
             throw new Error("Failed to fetch spelers data");
-        const data = await response.json();
-        if (!Array.isArray(data)) {
-            return res.status(500).send("Dataformaat is ongeldig.");
-        }
-        const spelers = data;
-        const speler = spelers.find((s) => s.id === parseInt(req.params.id, 10));
+        const data = (await response.json());
+        const speler = data.find(s => s.id === parseInt(req.params.id, 10));
         if (!speler)
             return res.status(404).send("Speler niet gevonden");
         res.json(speler);

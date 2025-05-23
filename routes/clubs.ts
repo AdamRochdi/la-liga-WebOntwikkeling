@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Club, IClub } from "../models/Clubs"; // Let op: Clubs.ts met hoofdletter C en s
+import { Club, IClub } from "../models/Clubs.js";  // Note: .js extension is required
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get("/", async (req: Request, res: Response) => {
 
         const filter = (req.query.filter as string) || "";
         if (filter) {
-            clubs = clubs.filter((c: IClub) =>
+            clubs = clubs.filter(c =>
                 c.name.toLowerCase().includes(filter.toLowerCase())
             );
         }
@@ -17,9 +17,9 @@ router.get("/", async (req: Request, res: Response) => {
         const sortField = (req.query.sortField as keyof IClub) || "name";
         const sortOrder = (req.query.sortOrder as string) || "asc";
 
-        clubs.sort((a: IClub, b: IClub) => {
-            let aField = a[sortField];
-            let bField = b[sortField];
+        clubs.sort((a, b) => {
+            let aField = a[sortField] as string | number;
+            let bField = b[sortField] as string | number;
 
             if (typeof aField === "string") aField = aField.toLowerCase();
             if (typeof bField === "string") bField = bField.toLowerCase();
@@ -50,10 +50,13 @@ router.put("/:id", async (req: Request, res: Response) => {
         const id = parseInt(req.params.id, 10);
         const updateData = req.body;
 
-        const allowedFields = ["name", "stadium", "founded", "isChampion"];
+        // Allow updating only these fields
+        const allowedFields: (keyof IClub)[] = ["name", "stadium", "founded", "isChampion"];
         const filteredData: Partial<IClub> = {};
         for (const key of allowedFields) {
-            if (updateData[key] !== undefined) filteredData[key] = updateData[key];
+            if (updateData[key] !== undefined) {
+                filteredData[key] = updateData[key];
+            }
         }
 
         const updatedClub = await Club.findOneAndUpdate({ id }, filteredData, { new: true });

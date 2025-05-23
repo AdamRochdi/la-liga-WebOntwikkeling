@@ -1,8 +1,6 @@
 import { Router } from "express";
-import { Club } from "../models/Clubs"; // Import je Mongoose model hier
-// let op: pas het pad aan naar waar jouw Club model staat
+import { Club } from "../models/Clubs.js"; // Note: .js extension is required
 const router = Router();
-// Route voor alle clubs + filter + sortering
 router.get("/", async (req, res) => {
     try {
         let clubs = await Club.find();
@@ -31,7 +29,6 @@ router.get("/", async (req, res) => {
         res.status(500).send("Er is een fout opgetreden: " + error);
     }
 });
-// Route voor detailpagina van één club
 router.get("/:id", async (req, res) => {
     try {
         const club = await Club.findOne({ id: parseInt(req.params.id, 10) });
@@ -43,17 +40,17 @@ router.get("/:id", async (req, res) => {
         res.status(500).send("Er is een fout opgetreden: " + error);
     }
 });
-// Edit endpoint (PUT)
 router.put("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
         const updateData = req.body;
-        // Velden die geüpdatet mogen worden
+        // Allow updating only these fields
         const allowedFields = ["name", "stadium", "founded", "isChampion"];
         const filteredData = {};
         for (const key of allowedFields) {
-            if (updateData[key] !== undefined)
+            if (updateData[key] !== undefined) {
                 filteredData[key] = updateData[key];
+            }
         }
         const updatedClub = await Club.findOneAndUpdate({ id }, filteredData, { new: true });
         if (!updatedClub)

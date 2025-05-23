@@ -1,10 +1,9 @@
 import { Router, Request, Response } from "express";
 import fetch from "node-fetch";
-import { Speler } from "../interfaces";
+import { Speler } from "../interfaces.js";  // make sure this exists
 
 const router = Router();
 
-// Gewijzigde, correcte raw GitHub URL
 const SPELERS_JSON_URL =
     "https://raw.githubusercontent.com/AdamRochdi/la-liga-WebOntwikkeling/refs/heads/main/public/spelers.json";
 
@@ -17,7 +16,7 @@ router.get("/", async (req: Request, res: Response) => {
 
         const filter = (req.query.filter as string) || "";
         if (filter) {
-            spelers = spelers.filter((s) =>
+            spelers = spelers.filter(s =>
                 s.name.toLowerCase().includes(filter.toLowerCase())
             );
         }
@@ -48,15 +47,9 @@ router.get("/:id", async (req: Request, res: Response) => {
         const response = await fetch(SPELERS_JSON_URL);
         if (!response.ok) throw new Error("Failed to fetch spelers data");
 
-        const data = await response.json() as unknown;
+        const data = (await response.json()) as Speler[];
 
-        if (!Array.isArray(data)) {
-            return res.status(500).send("Dataformaat is ongeldig.");
-        }
-
-        const spelers: Speler[] = data;
-
-        const speler = spelers.find((s) => s.id === parseInt(req.params.id, 10));
+        const speler = data.find(s => s.id === parseInt(req.params.id, 10));
 
         if (!speler) return res.status(404).send("Speler niet gevonden");
 

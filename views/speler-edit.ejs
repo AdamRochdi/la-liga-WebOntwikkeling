@@ -11,13 +11,11 @@
 
     <form method="post" action="/spelers/<%= speler._id %>/edit">
         <label>
-            Naam:
-            <input type="text" name="name" value="<%= speler.name %>" required />
+            Naam: <input type="text" name="name" value="<%= speler.name %>" required />
         </label><br />
 
         <label>
-            Leeftijd:
-            <input type="number" name="age" value="<%= speler.age || '' %>" min="0" />
+            Leeftijd: <input type="number" name="age" value="<%= speler.age || '' %>" min="0" />
         </label><br />
 
         <label>

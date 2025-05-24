@@ -9,7 +9,7 @@ export interface IClub extends Document {
     isChampion: boolean;
 }
 
-// Maak het schema aan
+// Maakt het schema aan
 const clubSchema = new Schema<IClub>({
     id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },

@@ -1,187 +1,186 @@
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #f9f9f9;
+      color: #222;
+      padding: 1rem;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 2rem auto;
-            background: #f9f9f9;
-            color: #222;
-            padding: 1rem;
-        }
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 2rem;
+    }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 2rem;
-        }
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #0077cc;
+    }
 
-        nav a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #0077cc;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
+    #filterInput {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
+      margin-bottom: 1.5rem;
+    }
 
-        #filterInput {
-            width: 100%;
-            padding: 0.7rem 1rem;
-            font-size: 1.1rem;
-            border-radius: 6px;
-            border: 1.5px solid #ccc;
-            margin-bottom: 1.5rem;
-        }
+    #sortControls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
 
-        #sortControls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
+    .sort-button {
+      cursor: pointer;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      font-weight: bold;
+      color: #0077cc;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
 
-        .sort-button {
-            cursor: pointer;
-            font-size: 1rem;
-            background: none;
-            border: none;
-            font-weight: bold;
-            color: #0077cc;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
+    .arrow {
+      font-size: 0.9rem;
+    }
 
-        .arrow {
-            font-size: 0.9rem;
-        }
+    #clubFilters {
+      margin-bottom: 1.5rem;
+    }
 
-        #clubFilters {
-            margin-bottom: 1.5rem;
-        }
+    #clubFilters label {
+      margin-right: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      user-select: none;
+    }
 
-        #clubFilters label {
-            margin-right: 15px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            user-select: none;
-        }
+    #clubFilters input[type="checkbox"] {
+      margin-right: 6px;
+      cursor: pointer;
+    }
 
-        #clubFilters input[type="checkbox"] {
-            margin-right: 6px;
-            cursor: pointer;
-        }
+    #spelersContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      justify-content: center;
+    }
 
-        #spelersContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-            justify-content: center;
-        }
+    .speler {
+      background: white;
+      border-radius: 18px;
+      padding: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      transition: transform 0.15s ease-in-out;
+      user-select: none;
+    }
 
-        .speler {
-            background: white;
-            border-radius: 18px;
-            padding: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            transition: transform 0.15s ease-in-out;
-            user-select: none;
-        }
+    .speler:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+    }
 
-        .speler:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
-        }
+    .speler img {
+      width: 90px;
+      height: 90px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 2.5px solid #0077cc;
+      background: #eee;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
 
-        .speler img {
-            width: 90px;
-            height: 90px;
-            border-radius: 18px;
-            object-fit: cover;
-            border: 2.5px solid #0077cc;
-            background: #eee;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
+    .speler span {
+      font-weight: 600;
+      color: #0077cc;
+      font-size: 1.1rem;
+      text-align: left;
+      display: block;
+    }
 
-        .speler span {
-            font-weight: 600;
-            color: #0077cc;
-            font-size: 1.1rem;
-            text-align: left;
-            display: block;
-        }
+    #detailOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
 
-        #detailOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+    #detailContent {
+      background: white;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      padding: 1.5rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      overflow-y: auto;
+      max-height: 90vh;
+      position: relative;
+    }
 
-        #detailContent {
-            background: white;
-            border-radius: 12px;
-            max-width: 400px;
-            width: 90%;
-            padding: 1.5rem;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            overflow-y: auto;
-            max-height: 90vh;
-            position: relative;
-        }
+    #detailContent img.player-img {
+      display: block;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      border: 3px solid #0077cc;
+      background: #eee;
+    }
 
-        #detailContent img.player-img {
-            display: block;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1rem;
-            border: 3px solid #0077cc;
-            background: #eee;
-        }
+    #detailContent img.team-img {
+      display: block;
+      width: 100px;
+      margin: 1rem auto 0;
+    }
 
-        #detailContent img.team-img {
-            display: block;
-            width: 100px;
-            margin: 1rem auto 0;
-        }
+    #closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.2s ease;
+    }
 
-        #closeBtn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: #999;
-            transition: color 0.2s ease;
-        }
+    #closeBtn:hover {
+      color: #0077cc;
+    }
 
-        #closeBtn:hover {
-            color: #0077cc;
-        }
+    #detailContent h2 {
+      margin-top: 0;
+      color: #0077cc;
+      text-align: center;
+    }
 
-        #detailContent h2 {
-            margin-top: 0;
-            color: #0077cc;
-            text-align: center;
-        }
-
-        #detailContent p {
-            margin: 0.5rem 0;
-        }
+    #detailContent p {
+      margin: 0.5rem 0;
+    }

@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 
 const router = Router();
 
-// Lijst van spelers ophalen met filter en sortering uit MongoDB
+// Lijst van spelers ophalen (+ filter en sortering) uit MongoDB
 router.get("/", async (req: Request, res: Response) => {
     try {
         const filter = (req.query.filter as string) || "";

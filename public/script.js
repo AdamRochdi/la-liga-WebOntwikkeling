@@ -3,7 +3,7 @@ async function haalSpelersOp() {
     const url = filter ? `/spelers?filter=${encodeURIComponent(filter)}` : "/spelers";
     const res = await fetch(url);
     const data = await res.json();
-    return data.spelers;  // hier pak je alleen de array van spelers
+    return data.spelers;  
 }
 
 function toonSpelers(spelers) {
@@ -44,5 +44,5 @@ async function updateSpelers() {
 
 document.getElementById("filterInput").addEventListener("input", updateSpelers);
 
-// Eerst spelers laden
+
 updateSpelers();

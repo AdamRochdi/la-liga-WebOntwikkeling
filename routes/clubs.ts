@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { Club, IClub } from "../models/Club.js";  // Named import voor Club en IClub
-
+import { Club, IClub } from "../models/Club.js";  
 
 const router = Router();
 
+// Lijst van Clubs ophalen (+ filter en sortering) uit MongoDB
 router.get("/", async (req: Request, res: Response) => {
     try {
         let clubs: IClub[] = await Club.find();
@@ -36,6 +36,7 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
+// Club detail ophalen (JSON)
 router.get("/:id", async (req: Request, res: Response) => {
     try {
         const club = await Club.findOne({ id: parseInt(req.params.id, 10) });
@@ -46,12 +47,12 @@ router.get("/:id", async (req: Request, res: Response) => {
     }
 });
 
+//Update club op ID
 router.put("/:id", async (req: Request, res: Response) => {
     try {
         const id = parseInt(req.params.id, 10);
         const updateData = req.body;
 
-        // Alleen deze velden mogen geüpdatet worden
         const allowedFields: (keyof IClub)[] = ["name", "stadium", "founded", "isChampion"];
         const filteredData: Partial<IClub> = {};
         for (const key of allowedFields) {

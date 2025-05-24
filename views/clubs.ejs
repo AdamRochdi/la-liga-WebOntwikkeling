@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Clubs overzicht</title>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+    <h1>Clubs overzicht</h1>
+
+    <form method="get" action="/clubs">
+        <input type="text" name="filter" placeholder="Filter op clubnaam" value="<%= filter %>" />
+        <select name="sortField">
+            <option value="name" <%= sortField === 'name' ? 'selected' : '' %>>Naam</option>
+            <option value="founded" <%= sortField === 'founded' ? 'selected' : '' %>>Oprichtingsjaar</option>
+            <option value="stadium" <%= sortField === 'stadium' ? 'selected' : '' %>>Stadion</option>
+        </select>
+        <select name="sortOrder">
+            <option value="asc" <%= sortOrder === 'asc' ? 'selected' : '' %>>Oplopend</option>
+            <option value="desc" <%= sortOrder === 'desc' ? 'selected' : '' %>>Aflopend</option>
+        </select>
+        <button type="submit">Zoeken</button>
+    </form>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Stadion</th>
+                <th>Oprichtingsjaar</th>
+                <th>Kampioen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% clubs.forEach(club => { %>
+                <tr>
+                    <td><a href="/clubs/<%= club.id %>"><%= club.name %></a></td>
+                    <td><%= club.stadium %></td>
+                    <td><%= club.founded %></td>
+                    <td><%= club.isChampion ? "Ja" : "Nee" %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
